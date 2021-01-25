@@ -4,6 +4,7 @@ import (
   "fmt"
   "net/http"
   "github.com/julienschmidt/httprouter"
+  "golang.org/x/net/http2"
 )
 
 func hello(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -18,5 +19,6 @@ func main() {
     Handler: mux,
   }
 
+  http2.ConfigureServer(&server, &http2.Server{})
   server.ListenAndServe()
 }
